@@ -3,7 +3,6 @@
             [cheshire.core :as cheshire])
   (:gen-class))
 
-
 (def access-key "0bf2bab980a7b6eaf5f8e4f9451e2fc2de54c39b")
 (def endpoint "https://api.waqi.info/feed/")
 
@@ -15,7 +14,7 @@
       :body
       (cheshire/parse-string true)))
 
-(defn get-air-quality 
+(defn get-air-quality
   "If city found returns a map with air quality informations from waqi API.
 
    A map in following format is returned:
@@ -46,16 +45,12 @@
            :tz +01:00
            :v 1579021200}
            :debug {:sync 2020-01-15T03:49:28+09:00}}}"
-  
+
   [city]
   (let [response (send-request (build-request-about-city-str city))]
     (if (= "ok" (get response :status))
       response
-      (println "Please provide correct city")
-      )
-    )
-  )
-
+      (println "Please provide correct city"))))
 
 (defn -main
   [city]
