@@ -87,11 +87,15 @@
 
 (defn get-pm10 [response]
   (let [pm10 (get-in response [:data :iaqi :pm10 :v])]
-    (str ", PM 10: " pm10 " μg/m3 (" (* 100 (/ pm10 50)) "%).")))
+    (if (not (= pm10 nil))
+      (str ", PM 10: " pm10 " μg/m3 (" (* 100 (/ pm10 50)) "%).")
+      ", no data about PM 10 in this location")))
 
 (defn get-pm25 [response]
   (let [pm25 (get-in response [:data :iaqi :pm25 :v])]
-    (str ", PM 2.5: " pm25 " μg/m3 (" (* 100 (/ pm25 50)) "%)")))
+    (if (not (= pm25 nil))
+      (str ", PM 2.5: " pm25 " μg/m3 (" (* 100 (/ pm25 50)) "%)")
+      ", no data about PM 2.5 in this location")))
 
 (defn get-complete-air-quality [response]
   (str (get-aqi response) (get-pm25 response) (get-pm10 response)))
