@@ -59,7 +59,9 @@
   (get-in response [:data :iaqi :pm10 :v]))
 
 (defn get-pm25 [response]
-  (get-in response [:data :iaqi :pm25 :v]))
+  (let [pm25 (get-in response [:data :iaqi :pm25 :v])]
+    (str "pm 2.5: "(* 100 (/ pm25 25)) "%")))
+
 
 (defn -main
   [city]
