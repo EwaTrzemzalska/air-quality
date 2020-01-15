@@ -56,9 +56,11 @@
   (get-in response [:data :aqi]))
 
 (defn get-pm10 [response]
-  (get-in response [:data :iaqi :pm10 :v])
-  )
+  (get-in response [:data :iaqi :pm10 :v]))
+
+(defn get-pm25 [response]
+  (get-in response [:data :iaqi :pm25 :v]))
 
 (defn -main
   [city]
-  (println (get-pm10(send-request(build-request-about-city-str city)))))
+  (println (get-pm25(send-request(build-request-about-city-str city)))))
