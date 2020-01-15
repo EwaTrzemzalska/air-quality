@@ -57,13 +57,13 @@
 
 (defn get-pm10 [response]
   (let [pm10 (get-in response [:data :iaqi :pm10 :v])]
-    (str "pm 10: " pm10 "μg/m3 (" (* 100 (/ pm10 50)) "%)")))
+    (str "PM 10: " pm10 " μg/m3 (" (* 100 (/ pm10 50)) "%)")))
 
 (defn get-pm25 [response]
   (let [pm25 (get-in response [:data :iaqi :pm25 :v])]
-    (str "pm 2.5: "(* 100 (/ pm25 25)) "%")))
+    (str "PM 2.5: " pm25 " μg/m3 (" (* 100 (/ pm25 50)) "%)")))
 
 
 (defn -main
   [city]
-  (println (get-pm10(send-request(build-request-about-city-str city)))))
+  (println (get-pm25(send-request(build-request-about-city-str city)))))
