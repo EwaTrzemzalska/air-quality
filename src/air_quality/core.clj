@@ -42,9 +42,35 @@
                   :w {:v 0.2}
                   :wg {:v 2.5}}
            :time {:s 2020-01-14 17:00:00
-           :tz +01:00
-           :v 1579021200}
-           :debug {:sync 2020-01-15T03:49:28+09:00}}}"
+                  :tz +01:00
+                  :v 1579021200}
+           :debug {:sync 2020-01-15T03:49:28+09:00}}}
+
+
+    {:status ok
+     :data {:aqi 53
+            :idx 6132
+            :attributions [{:url http://www.stadtentwicklung.berlin.de/umwelt/luftqualitaet/
+                            :name Berlin Air Quality - (Luftqualität in Berlin)
+                            :logo Germany-Berlin.png} 
+                           {:url https://waqi.info/
+                            :name World Air Quality Index Project}]
+            :city {:geo [52.5200066 13.404954]
+                   :name Berlin Germany
+                   :url https://aqicn.org/city/germany/berlin}
+            :dominentpol pm10
+            :iaqi {:no2 {:v 30.2}
+                   :o3 {:v 17.1}
+                   :pm10 {:v 53}
+                   :t {:v 12.8}
+                   :wg {:v 24.5}}
+                   :time {:s 2020-01-15 14:00:00
+                          :tz +01:00
+                          :v 1579096800}
+                   :debug {:sync 2020-01-15T23:17:43+09:00}}}
+
+
+"
 
   [city]
   (let [response (send-request (build-request-about-city-str city))]
@@ -54,7 +80,10 @@
 
 (defn get-aqi [response]
   (let [aqi (get-in response [:data :aqi])]
-    (str "According to latest data - AQI: " aqi " (" (* 100 (/ aqi 50)) "%)")))
+    (if (not (= aqi nil))
+      (str "According to latest data - AQI: " aqi " (" (* 100 (/ aqi 50)) "%)")
+      "No data about AQI in this location"
+      )))
 
 (defn get-pm10 [response]
   (let [pm10 (get-in response [:data :iaqi :pm10 :v])]
