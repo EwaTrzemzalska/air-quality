@@ -52,6 +52,10 @@
       response
       (println "Please provide correct city"))))
 
+(defn get-aqi [response]
+  (get-in response [:data :aqi])
+  )
+
 (defn -main
   [city]
-  (println (get-air-quality city)))
+  (println (get-aqi(send-request(build-request-about-city-str city)))))
