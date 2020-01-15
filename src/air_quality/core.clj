@@ -67,10 +67,7 @@
                    :time {:s 2020-01-15 14:00:00
                           :tz +01:00
                           :v 1579096800}
-                   :debug {:sync 2020-01-15T23:17:43+09:00}}}
-
-
-"
+                   :debug {:sync 2020-01-15T23:17:43+09:00}}}"
 
   [city]
   (let [response (send-request (build-request-about-city-str city))]
@@ -82,8 +79,7 @@
   (let [aqi (get-in response [:data :aqi])]
     (if (not (= aqi nil))
       (str "According to latest data - AQI: " aqi " (" (* 100 (/ aqi 50)) "%)")
-      "No data about AQI in this location"
-      )))
+      "No data about AQI in this location")))
 
 (defn get-pm10 [response]
   (let [pm10 (get-in response [:data :iaqi :pm10 :v])]
