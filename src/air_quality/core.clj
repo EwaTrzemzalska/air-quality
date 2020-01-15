@@ -29,18 +29,18 @@
                            :logo poland-wios-national.png} 
                           {:url https://waqi.info/
                            :name World Air Quality Index Project}]
-    :city {:geo [50.057447 19.946008]
-           :name Kraków-ul. Dietla Małopolska Poland
-           :url https://aqicn.org/city/poland/malopolska/krakow-ul.-dietla}
+           :city {:geo [50.057447 19.946008]
+                  :name Kraków-ul. Dietla Małopolska Poland
+                  :url https://aqicn.org/city/poland/malopolska/krakow-ul.-dietla}
            :dominentpol pm25
            :iaqi {:co {:v 15.2}
-           :no2 {:v 24.2}
-           :p {:v 1019.7}
-           :pm10 {:v 58}
-           :pm25 {:v 148}
-           :t {:v -0.1}
-           :w {:v 0.2}
-           :wg {:v 2.5}}
+                  :no2 {:v 24.2}
+                  :p {:v 1019.7}
+                  :pm10 {:v 58}
+                  :pm25 {:v 148}
+                  :t {:v -0.1}
+                  :w {:v 0.2}
+                  :wg {:v 2.5}}
            :time {:s 2020-01-14 17:00:00
            :tz +01:00
            :v 1579021200}
@@ -53,9 +53,12 @@
       (println "Please provide correct city"))))
 
 (defn get-aqi [response]
-  (get-in response [:data :aqi])
+  (get-in response [:data :aqi]))
+
+(defn get-pm10 [response]
+  (get-in response [:data :iaqi :pm10 :v])
   )
 
 (defn -main
   [city]
-  (println (get-aqi(send-request(build-request-about-city-str city)))))
+  (println (get-pm10(send-request(build-request-about-city-str city)))))
