@@ -1,36 +1,28 @@
 # air-quality
 
-FIXME: description
-
-## Installation
-
-Download from http://example.com/FIXME.
+In this app you can simply provide the city and get air quality data in this area in return.
 
 ## Usage
 
-FIXME: explanation
+To run executable use: `./air-quality "Your city"`
 
-    $ java -jar air-quality-0.1.0-standalone.jar [args]
+You can add an alias in your bash settings (i.e. "~/.bash.rc"): 
 
-## Options
+```bash
+alias air-quality=~[PROVIDE-YOUR-PATH]/air-quality
+```
 
-FIXME: listing of options this app accepts.
+## Development
 
-## Examples
+To run this project use: `lein run`
 
-...
+To run tests use: `lein test`
 
-### Bugs
-
-...
-
-### Any Other Sections
-### That You Think
-### Might be Useful
+To pack app as an executable use: `lein bin`
 
 ## License
 
-Copyright © 2020 FIXME
+Copyright © 2020 EwaTrzemzalska
 
 This program and the accompanying materials are made available under the
 terms of the Eclipse Public License 2.0 which is available at
