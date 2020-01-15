@@ -54,7 +54,7 @@
 
 (defn get-aqi [response]
   (let [aqi (get-in response [:data :aqi])]
-    (str "According to latest data - AQI: " aqi " ("(* 100 (/ aqi 50))"%)")))
+    (str "According to latest data - AQI: " aqi " (" (* 100 (/ aqi 50)) "%)")))
 
 (defn get-pm10 [response]
   (let [pm10 (get-in response [:data :iaqi :pm10 :v])]
@@ -67,7 +67,6 @@
 (defn get-complete-air-quality [response]
   (str (get-aqi response) (get-pm25 response) (get-pm10 response)))
 
-
 (defn -main
   [city]
-  (println (get-complete-air-quality(get-air-quality city))))
+  (println (get-complete-air-quality (get-air-quality city))))
