@@ -53,17 +53,21 @@
       (println "Please provide correct city"))))
 
 (defn get-aqi [response]
-  (get-in response [:data :aqi]))
+  (let [aqi (get-in response [:data :aqi])]
+    (str "According to latest data - AQI: " aqi " ("(* 100 (/ aqi 50))"%)")))
 
 (defn get-pm10 [response]
   (let [pm10 (get-in response [:data :iaqi :pm10 :v])]
-    (str "PM 10: " pm10 " μg/m3 (" (* 100 (/ pm10 50)) "%)")))
+    (str ", PM 10: " pm10 " μg/m3 (" (* 100 (/ pm10 50)) "%).")))
 
 (defn get-pm25 [response]
   (let [pm25 (get-in response [:data :iaqi :pm25 :v])]
-    (str "PM 2.5: " pm25 " μg/m3 (" (* 100 (/ pm25 50)) "%)")))
+    (str ", PM 2.5: " pm25 " μg/m3 (" (* 100 (/ pm25 50)) "%)")))
+
+(defn get-complete-air-quality [response]
+  (str (get-aqi response) (get-pm25 response) (get-pm10 response)))
 
 
 (defn -main
   [city]
-  (println (get-pm25(send-request(build-request-about-city-str city)))))
+  (println (get-complete-air-quality(get-air-quality city))))
