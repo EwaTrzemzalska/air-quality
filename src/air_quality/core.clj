@@ -75,10 +75,16 @@
       response
       (println "Please provide correct city"))))
 
+(defn get-location [response]
+  (let [location (get-in response [:data :city :name])]
+    (if (not (= location nil))
+      (str "In " location)
+      "Location not found, ")))
+
 (defn get-aqi [response]
   (let [aqi (get-in response [:data :aqi])]
     (if (not (= aqi nil))
-      (str "According to latest data - AQI: " aqi " (" (* 100 (/ aqi 50)) "%)")
+      (str " - AQI: " aqi " (" (* 100 (/ aqi 50)) "%)")
       "No data about AQI in this location")))
 
 (defn get-pm10 [response]
@@ -95,7 +101,7 @@
 
 (defn get-final-str [city]
   (let [response (get-air-quality city)] 
-    (str (get-aqi response) (get-pm25 response) (get-pm10 response))))
+    (str (get-location response) (get-aqi response) (get-pm25 response) (get-pm10 response))))
 
 (defn -main
   [city]
