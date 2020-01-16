@@ -68,7 +68,6 @@
                           :tz +01:00
                           :v 1579096800}
                    :debug {:sync 2020-01-15T23:17:43+09:00}}}"
-
   [city]
   (let [response (send-request (build-request-about-city-str city))]
     (if (= "ok" (get response :status))
@@ -100,7 +99,7 @@
       ", no data about PM 2.5 in this location")))
 
 (defn get-final-str [city]
-  (let [response (get-air-quality city)] 
+  (let [response (get-air-quality city)]
     (str (get-location response) (get-aqi response) (get-pm25 response) (get-pm10 response))))
 
 (defn -main
