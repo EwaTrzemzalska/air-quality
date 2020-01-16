@@ -93,9 +93,10 @@
       (str ", PM 2.5: " pm25 " μg/m3 (" (* 100 (/ pm25 50)) "%)")
       ", no data about PM 2.5 in this location")))
 
-(defn get-complete-air-quality [response]
-  (str (get-aqi response) (get-pm25 response) (get-pm10 response)))
+(defn get-final-str [city]
+  (let [response (get-air-quality city)] 
+    (str (get-aqi response) (get-pm25 response) (get-pm10 response))))
 
 (defn -main
   [city]
-  (println (get-complete-air-quality (get-air-quality city))))
+  (println (get-final-str city)))
