@@ -18,22 +18,26 @@
     (when location
       (str "In " location))))
 
+(def aqi-norm 50)
+(def pm25-norm 25)
+(def pm10-norm 50)
+
 (defn aqi-str [air-quality-info]
   (let [aqi (air-quality-info->aqi air-quality-info)]
     (if aqi
-      (str " - AQI: " aqi " (" (* 100 (/ aqi 50)) "%)")
+      (str " - AQI: " aqi " (" (* 100 (/ aqi aqi-norm)) "%)")
       "no data about AQI, ")))
 
 (defn pm25-str [air-quality-info]
   (let [pm25 (air-quality-info->pm25 air-quality-info)]
     (if pm25
-      (str ", PM 2.5: " pm25 " μg/m3 (" (* 100 (/ pm25 50)) "%)")
+      (str ", PM 2.5: " pm25 " μg/m3 (" (* 100 (/ pm25 pm25-norm)) "%)")
       ", no data about PM 2.5 in this location")))
 
 (defn pm10-str [air-quality-info]
   (let [pm10 (air-quality-info->pm10 air-quality-info)]
     (if pm10
-      (str ", PM 10: " pm10 " μg/m3 (" (* 100 (/ pm10 50)) "%).")
+      (str ", PM 10: " pm10 " μg/m3 (" (* 100 (/ pm10 pm10-norm)) "%).")
       ", no data about PM 10 in this location.")))
 
 (defn get-final-str [city]
