@@ -4,4 +4,4 @@
 
 (defn -main
   [city]
-  (println (ui/get-final-str city)))
+  (println (ui/build-result-str city)))
