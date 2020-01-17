@@ -1,4 +1,4 @@
-(ns air-quality.UI
+(ns air-quality.ui
   (:require [air-quality.waqi :as waqi]))
 
 (defn air-quality-info->location [air-quality-info]

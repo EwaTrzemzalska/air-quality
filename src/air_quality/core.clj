@@ -1,5 +1,5 @@
 (ns air-quality.core
-  (:require [air-quality.UI :as ui])
+  (:require [air-quality.ui :as ui])
   (:gen-class))
 
 (defn -main
