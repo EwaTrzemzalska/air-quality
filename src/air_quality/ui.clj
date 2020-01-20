@@ -43,5 +43,8 @@
 (defn build-result-str [city]
   (let [air-quality-info (waqi/get-air-quality city)]
     (if (location-str air-quality-info)
-      (str (location-str air-quality-info) (aqi-str air-quality-info) (pm25-str air-quality-info) (pm10-str air-quality-info))
+      (str (location-str air-quality-info)
+           (aqi-str air-quality-info)
+           (pm25-str air-quality-info) 
+           (pm10-str air-quality-info))
       "Location not found")))
