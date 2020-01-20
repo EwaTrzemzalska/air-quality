@@ -1,5 +1,4 @@
-(ns air-quality.ui
-  (:require [air-quality.waqi :as waqi]))
+(ns air-quality.ui)
 
 (defn- air-quality-info->location [air-quality-info]
   (get-in air-quality-info [:data :city :name]))
@@ -40,11 +39,10 @@
       (str ", PM 10: " pm10 " μg/m3 (" (* 100 (/ pm10 pm10-norm)) "%).")
       ", no data about PM 10 in this location.")))
 
-(defn build-result-str [city]
-  (let [air-quality-info (waqi/get-air-quality city)]
+(defn build-result-str [air-quality-info]
     (if-let [location-str (build-location-str air-quality-info)]
      (str location-str
           (build-aqi-str air-quality-info)
           (build-pm25-str air-quality-info)
           (build-pm10-str air-quality-info))
-      "Location not found")))
+      "Location not found"))
