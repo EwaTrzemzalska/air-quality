@@ -18,9 +18,9 @@
     (when location
       (str "In " location))))
 
-(def aqi-norm 50)
-(def pm25-norm 25)
-(def pm10-norm 50)
+(defonce aqi-norm 50)
+(defonce pm25-norm 25)
+(defonce pm10-norm 50)
 
 (defn- aqi-str [air-quality-info]
   (let [aqi (air-quality-info->aqi air-quality-info)]
